@@ -44,5 +44,14 @@ HAVING AVG(length) > '120';
 
 -- Rank films by length (filter out the rows that have nulls or 0s in length column). 
 -- In your output, only select the columns title, length, and the rank.
-SELECT 
+SELECT title, length,
+  CASE
+  WHEN length < 92 then 'Shorty'
+  WHEN length >= 92 and length < 138 then 'Medium'
+  WHEN length >= 138 then 'Long'
+  ELSE 'No status'
+  END AS 'rank'
+FROM film
+WHERE length <> ' ' or length <> null
+ORDER BY length ASC;
 
